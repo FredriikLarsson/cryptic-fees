@@ -20,3 +20,8 @@
   text-align: center;
   font-size: large;
 }
+
+.chip-menu__image {
+  height: 75%;
+  width: auto;
+}

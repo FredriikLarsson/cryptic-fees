@@ -10,15 +10,19 @@ import { environment } from 'src/environments/environment';
 })
 export class DashboardComponent {
   public txFee: String = ''; // network fees for ethereum transactions
+  public cryptoCurrencies: {name: string, displayName: string, imgPath: string, imgAltText: string}[] = [
+    {"name": "btc", "displayName": "btc", "imgPath": "../../../assets/btc.svg", "imgAltText": ""},
+    {"name": "eth", "displayName": "eth", "imgPath": "../../../assets/eth.svg", "imgAltText": ""}
+  ]
 
   /** Based on the screen size, switch from standard to one column per row */
   cards = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(({ matches }) => {
       if (matches) {
         return [
-          { title: 'Ethereum', cols: 1, rows: 1, content: this.txFee },
-          { title: 'Card 2', cols: 1, rows: 1 },
-          { title: 'Card 3', cols: 1, rows: 1 }
+          { title: 'Ethereum', cols: 2, rows: 1, content: this.txFee },
+          { title: 'Card 2', cols: 2, rows: 1 },
+          { title: 'Card 3', cols: 2, rows: 1 }
         ];
       }
 
