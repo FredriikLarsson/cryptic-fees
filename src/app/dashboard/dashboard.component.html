@@ -1,8 +1,8 @@
 <div class="grid-container">
-  <div class="heading__container" fxLayout="row" fxLayoutAlign="center center"><h1 class="mat-h1">How much does it costs to send?</h1></div>
+  <div class="heading__container" fxLayout="row" fxLayoutAlign="center center"><h1>How much does it costs to send?</h1></div>
   
   <div class="chip-list__container" fxLayout="row" fxLayoutAlign="center center">
-    <mat-chip-list aria-label="Dog selection">
+    <mat-chip-list aria-label="">
       <mat-chip *ngFor="let currency of cryptoCurrencies">
         <mat-chip-avatar>
             <img [src]="currency.imgPath" [alt]="currency.imgAltText" class="chip-menu__image"/>
