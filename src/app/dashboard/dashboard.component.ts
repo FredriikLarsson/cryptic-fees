@@ -3,6 +3,17 @@ import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { environment } from 'src/environments/environment';
 
+interface cryptoCurrencyFees {
+  [cryptocurrencyName: string]: string
+}
+
+interface cryptoCurrency {
+  name: string,
+  displayName: string,
+  imgPath: string,
+  imgAltText: string
+}
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -10,12 +21,32 @@ import { environment } from 'src/environments/environment';
 })
 export class DashboardComponent {
 
-  // transaction fees for ethereum transactions
-  public txFee: String = '';
-  public cryptoCurrencies: {name: string, displayName: string, imgPath: string, imgAltText: string}[] = [
-    {"name": "btc", "displayName": "btc", "imgPath": "../../../assets/btc.svg", "imgAltText": ""},
-    {"name": "eth", "displayName": "eth", "imgPath": "../../../assets/eth.svg", "imgAltText": ""}
+  //Cryptocurrencies
+  public cryptoCurrencies: cryptoCurrency[] = [
+    {
+      name: "eth", 
+      displayName: "eth", 
+      imgPath: "../../../assets/eth.svg", 
+      imgAltText: ""
+    },
+    {
+      name: "btc", 
+      displayName: "btc", 
+      imgPath: "../../../assets/btc.svg", 
+      imgAltText: ""
+    }
   ]
+
+  public cryptoCurrencyFees: cryptoCurrencyFees = {
+    eth: '',
+    btc: ''
+  }
+
+  //Template constants
+  public static readonly TEMPLATE_STRING_LITERALS = {
+    TITLE: "What is the fee?",
+    SUBTITLE: "See transaction fees of different cryptocurrencies"
+  }
 
   constructor(private breakpointObserver: BreakpointObserver) {}
 
@@ -28,7 +59,7 @@ export class DashboardComponent {
       }
     }).
     then(responce => responce.json()).
-    then(data => this.txFee = data.blockPrices[0].estimatedPrices[0].price)
+    then(data => this.cryptoCurrencyFees['eth'] = data.blockPrices[0].estimatedPrices[0].price)
   }
 
   /** Layout based on the screen size, if mobile then switch to one card per row */
@@ -36,17 +67,21 @@ export class DashboardComponent {
     map(({ matches }) => {
       if (matches) {
         return [
-          { title: 'Ethereum', cols: 2, rows: 1, content: this.txFee },
+          { title: 'Ethereum', cols: 2, rows: 1, content: this.cryptoCurrencyFees['eth'] },
           { title: 'Card 2', cols: 2, rows: 1 },
           { title: 'Card 3', cols: 2, rows: 1 }
         ];
       } else {
         return [
-          { title: 'Ethereum', cols: 2, rows: 1, content: this.txFee },
+          { title: 'Ethereum', cols: 2, rows: 1, content: this.cryptoCurrencyFees['eth'] },
           { title: 'Card 2', cols: 1, rows: 1 },
           { title: 'Card 3', cols: 1, rows: 1 }
         ];
       }
     })
   );
+
+  public get getStringLiterals() {
+    return DashboardComponent.TEMPLATE_STRING_LITERALS;
+  }
 }

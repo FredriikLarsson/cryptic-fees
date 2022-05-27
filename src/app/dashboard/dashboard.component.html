@@ -1,13 +1,17 @@
 <div class="grid-container">
-  <div class="heading__container" fxLayout="row" fxLayoutAlign="center center"><h1>How much does it costs to send?</h1></div>
-  
+  <div class="heading__container" fxLayout="column" fxLayoutAlign="center center">
+    <h1>{{getStringLiterals.TITLE}}</h1>
+    <h2>{{getStringLiterals.SUBTITLE}}</h2>
+  </div>
+
   <div class="chip-list__container" fxLayout="row" fxLayoutAlign="center center">
     <mat-chip-list aria-label="">
       <mat-chip *ngFor="let currency of cryptoCurrencies">
+        {{currency.displayName}}
         <mat-chip-avatar>
             <img [src]="currency.imgPath" [alt]="currency.imgAltText" class="chip-menu__image"/>
         </mat-chip-avatar>
-        {{currency.displayName}}
+        {{cryptoCurrencyFees[currency.name]}}
       </mat-chip>
     </mat-chip-list>
   </div>
