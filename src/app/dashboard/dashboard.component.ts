@@ -7,35 +7,12 @@ interface cryptoCurrencyFees {
   [cryptocurrencyName: string]: string
 }
 
-interface cryptoCurrency {
-  name: string,
-  displayName: string,
-  imgPath: string,
-  imgAltText: string
-}
-
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
-
-  //Cryptocurrencies
-  public cryptoCurrencies: cryptoCurrency[] = [
-    {
-      name: "eth", 
-      displayName: "eth", 
-      imgPath: "../../../assets/eth.svg", 
-      imgAltText: ""
-    },
-    {
-      name: "btc", 
-      displayName: "btc", 
-      imgPath: "../../../assets/btc.svg", 
-      imgAltText: ""
-    }
-  ]
 
   public cryptoCurrencyFees: cryptoCurrencyFees = {
     eth: '',
